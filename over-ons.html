@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Over Ons — Power of AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/shared.css">
+    <style>
+        .page-hero{min-height:60vh;display:flex;align-items:center;position:relative;z-index:1;padding:140px 0 80px;overflow:hidden}
+        .page-hero-glow{position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(249,115,22,0.07),transparent 70%);pointer-events:none}
+        .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+        .page-hero h1{font-family:'Sora',sans-serif;font-size:clamp(2.5rem,5vw,3.8rem);font-weight:800;line-height:1.08;letter-spacing:-.04em;margin-bottom:20px}
+        .page-hero-desc{font-size:1.1rem;color:var(--text-secondary);line-height:1.7;max-width:520px}
+        .hero-image{border-radius:24px;overflow:hidden;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.4);position:relative}
+        .hero-image img{width:100%;height:400px;object-fit:cover;display:block}
+        .hero-image::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(249,115,22,.1),transparent)}
+
+        /* Mission/Vision */
+        .mv-section{padding:100px 0;position:relative;z-index:1}
+        .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+        .mv-card{background:var(--bg-card);border:1px solid var(--border);border-radius:24px;padding:44px;position:relative;overflow:hidden;transition:all .4s}
+        .mv-card:hover{transform:translateY(-4px);border-color:rgba(249,115,22,.15)}
+        .mv-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gradient-main)}
+        .mv-icon{font-size:2.5rem;margin-bottom:20px}
+        .mv-title{font-family:'Sora',sans-serif;font-size:1.4rem;font-weight:800;margin-bottom:12px}
+        .mv-text{color:var(--text-secondary);line-height:1.7;font-size:.95rem}
+
+        /* Timeline */
+        .timeline-section{padding:120px 0;position:relative;z-index:1}
+        .timeline{max-width:700px;margin:0 auto;position:relative;padding-left:40px}
+        .timeline::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--orange),var(--amber),var(--blue))}
+        .timeline-item{position:relative;padding-bottom:48px}
+        .timeline-item:last-child{padding-bottom:0}
+        .timeline-dot{position:absolute;left:-33px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--gradient-main);box-shadow:0 0 15px rgba(249,115,22,.3)}
+        .timeline-year{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--amber);font-weight:600;margin-bottom:6px}
+        .timeline-title{font-family:'Sora',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:6px}
+        .timeline-desc{font-size:.9rem;color:var(--text-secondary);line-height:1.6}
+
+        /* Team */
+        .team-section{padding:120px 0;position:relative;z-index:1}
+        .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+        .team-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .4s;text-align:center}
+        .team-card:hover{transform:translateY(-6px);border-color:rgba(249,115,22,.15);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+        .team-avatar{width:100%;height:220px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,rgba(249,115,22,.06),rgba(59,130,246,.06));position:relative;overflow:hidden}
+        .team-avatar svg{width:120px;height:120px}
+        .team-photo{width:100%;height:220px;object-fit:cover;display:block;filter:grayscale(20%);transition:filter .4s}
+        .team-card:hover .team-photo{filter:grayscale(0%)}
+        .team-card:hover .team-avatar{background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(59,130,246,.1))}
+        .team-info{padding:20px}
+        .team-name{font-family:'Sora',sans-serif;font-weight:700;font-size:1rem;margin-bottom:2px}
+        .team-role{font-size:.82rem;color:var(--amber);font-weight:500;margin-bottom:8px}
+        .team-fun{font-size:.78rem;color:var(--text-muted);font-style:italic}
+
+        /* Values */
+        .values-section{padding:120px 0;position:relative;z-index:1}
+        .values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+        .value-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:36px;text-align:center;transition:all .4s}
+        .value-card:hover{transform:translateY(-6px);border-color:rgba(249,115,22,.15);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+        .value-icon{font-size:2.5rem;margin-bottom:16px}
+        .value-title{font-family:'Sora',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:10px}
+        .value-desc{font-size:.88rem;color:var(--text-secondary);line-height:1.6}
+
+        /* Stats */
+        .stats-section{padding:80px 0;position:relative;z-index:1}
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+        .stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:36px;text-align:center;transition:all .3s}
+        .stat-card:hover{border-color:rgba(249,115,22,.15)}
+        .stat-val{font-family:'JetBrains Mono',monospace;font-size:2.5rem;font-weight:700;background:var(--gradient-mix);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .stat-label{font-size:.88rem;color:var(--text-secondary);margin-top:4px}
+
+        /* Office image */
+        .office-section{padding:80px 0;position:relative;z-index:1}
+        .office-img{width:100%;height:350px;object-fit:cover;border-radius:24px;border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+
+        /* CTA */
+        .cta-section{padding:100px 0;position:relative;z-index:1}
+        .cta-box{position:relative;border-radius:32px;padding:72px 64px;text-align:center;overflow:hidden;background:var(--bg-card);border:1px solid var(--border)}
+        .cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 70%,rgba(249,115,22,.08),transparent 50%)}
+        .cta-box::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gradient-main)}
+        .cta-content{position:relative;z-index:1}
+        .cta-title{font-family:'Sora',sans-serif;font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;line-height:1.1;margin-bottom:16px}
+        .cta-desc{font-size:1rem;color:var(--text-secondary);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+
+        @media(max-width:1024px){.hero-grid{grid-template-columns:1fr}.team-grid{grid-template-columns:repeat(2,1fr)}.values-grid{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}.mv-grid{grid-template-columns:1fr}}
+        @media(max-width:768px){.team-grid{grid-template-columns:1fr}.values-grid{grid-template-columns:1fr}.cta-box{padding:48px 24px}}
+    </style>
+</head>
+<body>
+    <div class="shooting-stars"><div class="shooting-star ss-1"></div><div class="shooting-star ss-2"></div></div>
+    <div class="bg-effects"><div class="bg-orb bg-orb-1"></div><div class="bg-orb bg-orb-2"></div></div>
+    <div class="bg-grid"></div>
+    <div class="loader" id="loader"><div class="loader-logo">⚡</div><div class="loader-bar"><div class="loader-bar-fill"></div></div><div class="loader-text">Laden...</div></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <nav class="nav" id="nav"><div class="container"><div class="nav-inner">
+        <a href="/" class="nav-logo"><div class="nav-logo-icon">⚡</div>Power of AI</a>
+        <ul class="nav-links">
+            <li class="nav-dropdown"><a href="/#diensten" class="nav-dropdown-toggle">Diensten <svg width="10" height="6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 1l4 4 4-4"/></svg></a><div class="nav-dropdown-menu"><a href="/diensten/ai-automatisering.html">AI Automatisering</a><a href="/diensten/ai-agents.html">AI Agents</a><a href="/diensten/ai-strategie.html">AI Strategie</a><a href="/diensten/ai-training.html">AI Training</a></div></li>
+            <li><a href="/over-ons.html">Over ons</a></li>
+            <li><a href="/blog.html">Blog</a></li>
+            <li><a href="/careers.html">Careers</a></li>
+            <li><a href="/contact.html" class="nav-cta">Gratis Gesprek →</a></li>
+        </ul>
+        <button class="mobile-toggle" onclick="toggleMobile()" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div></div></nav>
+
+    <!-- HERO -->
+    <section class="page-hero">
+        <div class="page-hero-glow"></div>
+        <div class="container">
+            <div class="hero-grid">
+                <div>
+                    <h1 class="reveal">Wij zijn<br><span class="gradient-text">Power of AI</span></h1>
+                    <p class="page-hero-desc reveal">Een team van AI-specialisten met één missie: Nederlandse bedrijven helpen groeien met de kracht van kunstmatige intelligentie.</p>
+                    <div class="reveal" style="display:flex;gap:16px;margin-top:32px;flex-wrap:wrap">
+                        <a href="/contact.html" class="btn-glow" style="border:none">Neem Contact Op →</a>
+                        <a href="/careers.html" class="btn-ghost">Bekijk Vacatures</a>
+                    </div>
+                </div>
+                <div class="hero-image reveal">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=500&fit=crop&q=80" alt="Team samenwerking">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="mv-section">
+        <div class="container">
+            <div class="mv-grid">
+                <div class="mv-card reveal">
+                    <div class="mv-icon">🎯</div>
+                    <h2 class="mv-title">Onze Missie</h2>
+                    <p class="mv-text">AI toegankelijk maken voor elk Nederlands bedrijf. Geen vage beloftes of dure experimenten — wij leveren concrete oplossingen die direct waarde toevoegen. Van MKB tot enterprise, iedereen verdient de kracht van AI.</p>
+                </div>
+                <div class="mv-card reveal">
+                    <div class="mv-icon">🔮</div>
+                    <h2 class="mv-title">Onze Visie</h2>
+                    <p class="mv-text">Een wereld waarin elk bedrijf AI als verlengstuk van hun team gebruikt. Waar repetitief werk verdwijnt, creativiteit bloeit, en technologie mensen versterkt in plaats van vervangt. Die toekomst begint vandaag.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+        <div class="container">
+            <div style="text-align:center;margin-bottom:56px">
+                <div class="section-tag reveal"><span class="section-tag-line"></span>Ons Verhaal</div>
+                <h2 class="section-heading reveal">Van idee naar <span class="gradient-text">impact</span></h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item reveal"><div class="timeline-dot"></div><div class="timeline-year">2024</div><h3 class="timeline-title">Het begin</h3><p class="timeline-desc">Gestart vanuit een passie voor AI en de overtuiging dat Nederlandse bedrijven meer uit technologie kunnen halen.</p></div>
+                <div class="timeline-item reveal"><div class="timeline-dot"></div><div class="timeline-year">2024</div><h3 class="timeline-title">Eerste klanten</h3><p class="timeline-desc">Onze eerste automatiseringsprojecten leverden direct resultaat. Klanten bespaarden gemiddeld 30% op operationele kosten.</p></div>
+                <div class="timeline-item reveal"><div class="timeline-dot"></div><div class="timeline-year">2025</div><h3 class="timeline-title">AI Agents lancering</h3><p class="timeline-desc">We lanceerden onze AI Agent dienst — autonome digitale medewerkers die 24/7 draaien voor onze klanten.</p></div>
+                <div class="timeline-item reveal"><div class="timeline-dot"></div><div class="timeline-year">2025</div><h3 class="timeline-title">WTC Den Haag</h3><p class="timeline-desc">Verhuisd naar het WTC The Hague Business Center — ons nieuwe thuis voor groei en innovatie.</p></div>
+                <div class="timeline-item reveal"><div class="timeline-dot"></div><div class="timeline-year">2026</div><h3 class="timeline-title">Vandaag</h3><p class="timeline-desc">50+ projecten opgeleverd, een groeiend team, en de ambitie om dé AI-partner voor Nederlandse bedrijven te worden.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section">
+        <div class="container">
+            <div style="text-align:center;margin-bottom:56px">
+                <div class="section-tag reveal"><span class="section-tag-line"></span>Het Team</div>
+                <h2 class="section-heading reveal">De mensen achter <span class="gradient-text">Power of AI</span></h2>
+            </div>
+            <div class="team-grid">
+                <div class="team-card reveal">
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="60" cy="60" r="58" fill="url(#g1)" stroke="rgba(249,115,22,0.2)" stroke-width="2"/>
+                            <circle cx="60" cy="45" r="20" fill="#FCD34D"/>
+                            <ellipse cx="60" cy="95" rx="30" ry="22" fill="#FCD34D"/>
+                            <circle cx="52" cy="42" r="2.5" fill="#1a1a2e"/>
+                            <circle cx="68" cy="42" r="2.5" fill="#1a1a2e"/>
+                            <path d="M55 50 Q60 55 65 50" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            <rect x="45" y="28" width="30" height="8" rx="2" fill="#1a1a2e" opacity="0.8"/>
+                            <defs><linearGradient id="g1" x1="0" y1="0" x2="120" y2="120"><stop stop-color="rgba(249,115,22,0.15)"/><stop offset="1" stop-color="rgba(59,130,246,0.15)"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Ka-Lok Chan</div>
+                        <div class="team-role">Founder & CEO</div>
+                        <div class="team-fun">Bouwt AI-systemen, denkt in workflows</div>
+                    </div>
+                </div>
+                <div class="team-card reveal">
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="60" cy="60" r="58" fill="url(#g2)" stroke="rgba(59,130,246,0.2)" stroke-width="2"/>
+                            <circle cx="60" cy="45" r="20" fill="#93C5FD"/>
+                            <ellipse cx="60" cy="95" rx="30" ry="22" fill="#93C5FD"/>
+                            <circle cx="52" cy="42" r="2.5" fill="#1a1a2e"/>
+                            <circle cx="68" cy="42" r="2.5" fill="#1a1a2e"/>
+                            <path d="M54 50 Q60 54 66 50" stroke="#1a1a2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            <path d="M40 32 Q60 22 80 32" stroke="#1a1a2e" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.7"/>
+                            <defs><linearGradient id="g2" x1="0" y1="0" x2="120" y2="120"><stop stop-color="rgba(59,130,246,0.15)"/><stop offset="1" stop-color="rgba(168,85,247,0.15)"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Sophie Bakker</div>
+                        <div class="team-role">AI Consultant</div>
+                        <div class="team-fun">Vertaalt tech naar business waarde</div>
+                    </div>
+                </div>
+                <div class="team-card reveal">
+                    <div class="team-avatar" style="font-size:5rem">
+                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="60" cy="60" r="58" fill="url(#g3)" stroke="rgba(245,158,11,0.2)" stroke-width="2"/>
+                            <!-- Dog body -->
+                            <ellipse cx="60" cy="72" rx="28" ry="22" fill="#D4A574"/>
+                            <!-- Dog head -->
+                            <circle cx="60" cy="48" r="18" fill="#D4A574"/>
+                            <!-- Ears -->
+                            <ellipse cx="42" cy="38" rx="8" ry="12" fill="#B8896A" transform="rotate(-15 42 38)"/>
+                            <ellipse cx="78" cy="38" rx="8" ry="12" fill="#B8896A" transform="rotate(15 78 38)"/>
+                            <!-- Eyes -->
+                            <circle cx="53" cy="46" r="3" fill="#1a1a2e"/>
+                            <circle cx="67" cy="46" r="3" fill="#1a1a2e"/>
+                            <circle cx="54" cy="45" r="1" fill="white"/>
+                            <circle cx="68" cy="45" r="1" fill="white"/>
+                            <!-- Nose -->
+                            <ellipse cx="60" cy="53" rx="3.5" ry="2.5" fill="#1a1a2e"/>
+                            <!-- Tongue -->
+                            <path d="M57 56 Q60 62 63 56" fill="#F87171"/>
+                            <defs><linearGradient id="g3" x1="0" y1="0" x2="120" y2="120"><stop stop-color="rgba(245,158,11,0.12)"/><stop offset="1" stop-color="rgba(249,115,22,0.12)"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Buddy</div>
+                        <div class="team-role">Chief Happiness Officer 🐕</div>
+                        <div class="team-fun">Bewaakt het kantoor, steelt de lunch</div>
+                    </div>
+                </div>
+                <div class="team-card reveal">
+                    <div class="team-avatar">
+                        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="60" cy="60" r="58" fill="url(#g4)" stroke="rgba(168,85,247,0.2)" stroke-width="2"/>
+                            <!-- Cat body -->
+                            <ellipse cx="60" cy="75" rx="25" ry="20" fill="#9CA3AF"/>
+                            <!-- Cat head -->
+                            <circle cx="60" cy="50" r="17" fill="#9CA3AF"/>
+                            <!-- Ears (triangles) -->
+                            <path d="M43 40 L38 22 L52 36 Z" fill="#9CA3AF"/>
+                            <path d="M77 40 L82 22 L68 36 Z" fill="#9CA3AF"/>
+                            <path d="M45 38 L41 26 L52 36 Z" fill="#F9A8D4" opacity="0.6"/>
+                            <path d="M75 38 L79 26 L68 36 Z" fill="#F9A8D4" opacity="0.6"/>
+                            <!-- Eyes -->
+                            <ellipse cx="52" cy="48" rx="3.5" ry="4" fill="#86EFAC"/>
+                            <ellipse cx="68" cy="48" rx="3.5" ry="4" fill="#86EFAC"/>
+                            <ellipse cx="52" cy="48" rx="1.5" ry="3.5" fill="#1a1a2e"/>
+                            <ellipse cx="68" cy="48" rx="1.5" ry="3.5" fill="#1a1a2e"/>
+                            <!-- Nose -->
+                            <path d="M58 54 L60 56 L62 54 Z" fill="#F9A8D4"/>
+                            <!-- Whiskers -->
+                            <line x1="35" y1="52" x2="50" y2="54" stroke="#6B7280" stroke-width="1"/>
+                            <line x1="35" y1="56" x2="50" y2="56" stroke="#6B7280" stroke-width="1"/>
+                            <line x1="70" y1="54" x2="85" y2="52" stroke="#6B7280" stroke-width="1"/>
+                            <line x1="70" y1="56" x2="85" y2="56" stroke="#6B7280" stroke-width="1"/>
+                            <defs><linearGradient id="g4" x1="0" y1="0" x2="120" y2="120"><stop stop-color="rgba(168,85,247,0.12)"/><stop offset="1" stop-color="rgba(236,72,153,0.12)"/></linearGradient></defs>
+                        </svg>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Pixel</div>
+                        <div class="team-role">Kantoorkat & Debugger 🐱</div>
+                        <div class="team-fun">Loopt over toetsenborden, fixt bugs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values-section">
+        <div class="container">
+            <div style="text-align:center;margin-bottom:56px">
+                <div class="section-tag reveal"><span class="section-tag-line"></span>Onze Waarden</div>
+                <h2 class="section-heading reveal">Waar we voor <span class="gradient-text">staan</span></h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card reveal"><div class="value-icon">🔍</div><h3 class="value-title">Transparantie</h3><p class="value-desc">Geen verborgen kosten, geen vage beloftes. Je weet altijd precies waar je aan toe bent.</p></div>
+                <div class="value-card reveal"><div class="value-icon">💡</div><h3 class="value-title">Innovatie</h3><p class="value-desc">We staan aan de frontlinie van AI. Nieuwe modellen, tools en technieken — wij testen ze eerst.</p></div>
+                <div class="value-card reveal"><div class="value-icon">📊</div><h3 class="value-title">Resultaatgericht</h3><p class="value-desc">Alles wat we bouwen wordt gemeten op impact. Geen ROI? Dan passen we de aanpak aan.</p></div>
+                <div class="value-card reveal"><div class="value-icon">🤝</div><h3 class="value-title">Samenwerking</h3><p class="value-desc">Wij zijn een verlengstuk van jouw team. Geen externe leverancier, maar een partner.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card reveal"><div class="stat-val">50+</div><div class="stat-label">Projecten</div></div>
+                <div class="stat-card reveal"><div class="stat-val">98%</div><div class="stat-label">Klanttevredenheid</div></div>
+                <div class="stat-card reveal"><div class="stat-val">40%</div><div class="stat-label">Gem. tijdsbesparing</div></div>
+                <div class="stat-card reveal"><div class="stat-val">5+</div><div class="stat-label">Teamleden</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Office -->
+    <section class="office-section">
+        <div class="container">
+            <img class="office-img reveal" src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=500&fit=crop&q=80" alt="WTC Den Haag kantoor">
+            <p class="reveal" style="text-align:center;color:var(--text-muted);font-size:.88rem;margin-top:16px">📍 WTC The Hague Business Center — Pr. Beatrixlaan 582, 2595 BM Den Haag</p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container"><div class="cta-box reveal"><div class="cta-content">
+            <h2 class="cta-title">Wil je bij ons <span class="gradient-text">team?</span></h2>
+            <p class="cta-desc">We zoeken altijd mensen die net zo enthousiast zijn over AI als wij. Bekijk onze vacatures of stuur een open sollicitatie.</p>
+            <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+                <a href="/careers.html" class="btn-glow" style="border:none">Bekijk Vacatures →</a>
+                <a href="/contact.html" class="btn-ghost">Neem Contact Op</a>
+            </div>
+        </div></div></div>
+    </section>
+
+    <footer class="footer"><div class="container">
+        <div class="footer-grid">
+            <div><a href="/" class="nav-logo"><div class="nav-logo-icon">⚡</div>Power of AI</a><p class="footer-desc">De kracht van AI voor jouw bedrijf.</p></div>
+            <div><h4 class="footer-heading">Diensten</h4><ul class="footer-list"><li><a href="/diensten/ai-automatisering.html">AI Automatisering</a></li><li><a href="/diensten/ai-agents.html">AI Agents</a></li><li><a href="/diensten/ai-strategie.html">AI Strategie</a></li><li><a href="/diensten/ai-training.html">AI Training</a></li></ul></div>
+            <div><h4 class="footer-heading">Bedrijf</h4><ul class="footer-list"><li><a href="/over-ons.html">Over ons</a></li><li><a href="/blog.html">Blog</a></li><li><a href="/careers.html">Careers</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+            <div><h4 class="footer-heading">Contact</h4><ul class="footer-list"><li><a href="mailto:info@powerofai.nl">info@powerofai.nl</a></li><li><a href="tel:+31703045300">070 304 5300</a></li><li>KVK: 91111366</li></ul></div>
+        </div>
+        <div class="footer-bottom"><span>&copy; 2026 Power of AI. Alle rechten voorbehouden.</span><div class="footer-socials"><a href="#" class="footer-social">in</a><a href="#" class="footer-social">𝕏</a></div></div>
+    </div></footer>
+
+    <script src="/js/shared.js"></script>
+</body>
+</html>

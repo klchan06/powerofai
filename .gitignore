@@ -1,0 +1,6 @@
+temp_screenshots/
+_gen.js
+tactiq-free-transcript-*.txt
+node_modules/
+.DS_Store
+Thumbs.db
